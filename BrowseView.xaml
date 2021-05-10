@@ -1,0 +1,43 @@
+﻿<Window x:Class="MajidApp.BrowseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MajidApp"
+        mc:Ignorable="d"
+        Title="Movies" Height="300" Width="300"
+        DataContext="{Binding MoviesViewModel, Source={StaticResource Locator}}" Closed="Window_Closed">
+    <Grid>
+        <StackPanel>
+            <!--Naam acteur-->
+            <Label Content="Naam" Margin="12,12,12,0" Padding="0,5"/>
+            <TextBox Text="{Binding SelectedMovies.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{DynamicResource MoviesTextboxStyle}"/>
+
+            <!--Beschrijving film-->
+            <Label Content="Beschrijving" Margin="12,0,12,0" Padding="0,5"/>
+            <TextBox Text="{Binding SelectedMovies.Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{DynamicResource MoviesTextboxStyle}"/>
+            
+            <!--Datum-->
+            <Label Content="Datum" Margin="12,0,12,0" Padding="0,5"/>
+            <DatePicker Margin="12,0,12,12" 
+                        SelectedDate="{Binding SelectedMovies.DueDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Content="&#xE0A6;" HorizontalAlignment="Left" 
+                        Command="{Binding GotoPreviousMovieCommand}" 
+                        Margin="12,0,0,0"
+                        Style="{DynamicResource SegoeMDL2ButtonStyle}"/>
+                <Button Content="&#xE0AD;" HorizontalAlignment="Right" 
+                        Command="{Binding GotoNextMovieCommand}"
+                        Margin="0,0,12,0" Grid.Column="1"
+                        Style="{DynamicResource SegoeMDL2ButtonStyle}"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
